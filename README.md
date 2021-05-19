@@ -46,11 +46,12 @@ From the root directory of the project run the following command:
 
 `export TWEET_SCRAPER_HANDLE=twitter-handle && docker-compose build && docker-compose up`
 
+To start up the app subsequently, run `docker-compose up` in the project root.
 
 ## Usage
 Regardless of which method you choose to run the app, it will print tweets to stdout. Initially 5 tweets should be printed (possibly with intermediate loading if required), and then every 10 minutes the feed will be polled for new tweets.
 
-With the above methods for running, ^C should kill the app.
+With the above methods for running, a couple of control-c's should kill the app.
 
 The app server will be available on http://localhost:5000. To retrieve a list of all tweets scraped during the app's runtime, use a get request with the endpoint /addTweets. For example,
 
