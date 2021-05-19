@@ -75,6 +75,25 @@ Running the app with this method may reuqire Firefox to be installed in your env
 [https://stackoverflow.com/questions/41190989/how-do-i-install-geckodriver](https://stackoverflow.com/questions/41190989/how-do-i-install-geckodriver)
 [https://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu](https://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu)
 
+### Straightforward Python
+
+Requirements
+- python3 and pip3 available as commands
+- port 5000 is available
+- internet access for installing packages
+- app process will need write permissions for its own directory
+- possibly Firefox installed, geckodriver available
+
+This is perhaps the least recommended method of running the app as it's most dependent on the host environment. All of the requirements for the Pipenv method also apply, and python3 and pip3 must be available.
+
+On first starting the app run:
+
+`export TWEET_SCRAPER_HANDLE=twitter-handle && sh pythonSetup.sh && sh pythonRun.sh`
+
+Subsquently you can run,
+
+`export TWEET_SCRAPER_HANDLE=twitter-handle && sh pythonRun.sh`
+
 ## Usage
 Regardless of which method you choose to run the app, it will print tweets to stdout. Initially 5 tweets should be printed (possibly with intermediate loading if required), and then every 10 minutes the feed will be polled for new tweets.
 
