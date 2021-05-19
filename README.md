@@ -71,8 +71,10 @@ Subsquently you can run,
 
 Unlike a containerised deployment, the twitter handle can be set anew each time the app is started.
 
-Running the app with this method may reuqire Firefox to be installed in your environment, and the firefox geckdodriver for selenium may need to be installed separately. Some methods of doing this are contained in these threads,
+Running the app with this method may require Firefox to be installed in your environment, and the firefox geckdodriver for selenium may need to be installed separately. Some methods of doing this are contained in these threads,
+
 [https://stackoverflow.com/questions/41190989/how-do-i-install-geckodriver](https://stackoverflow.com/questions/41190989/how-do-i-install-geckodriver)
+
 [https://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu](https://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu)
 
 ### Straightforward Python
