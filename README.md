@@ -10,7 +10,7 @@ Although this app should run on Windows in containerised or non-containerised fo
 
 The easiest way to ensure your environment is set up to run the app is to run inside a container. However, with this method the image and container will need to be removed and built again in order to change the twitter account that app monitors. With a pipenv or python deployment the twitter account followed can be set every time the app is run.
 
-**Note: When running with a container image created will be large (hundreds of mb) as it includes everything needed to run Selenium.**
+**Note: When running with a container the image created will be large (hundreds of mb) as it includes everything needed to run Selenium.**
 
 **In all of the following commands, substitute 'twitter-handle' for the handle of the account you wish to monitor. E.g. 'reuters'**
 
