@@ -5,6 +5,8 @@ This app scrapes the most recent tweets from a given account and prints them to 
 
 The project is written in Python3, uses Selenium for scraping and runs a Flask server which exposes a few APIs (see Usage).
 
+In order to scrape tweets, this app assumes particular xpaths for certain elements on the timeline. If twitter change the way they layout their interface, it may break functionality.
+
 ## Install and Run
 Although this app should run on Windows in containerised or non-containerised form, the instructions here are for *nix systems.
 
