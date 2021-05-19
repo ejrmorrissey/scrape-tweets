@@ -23,6 +23,16 @@ The script runDocker.sh is provided to make starting the app with docker simple.
 
 `export TWEET_SCRAPER_HANDLE=twitter-handle && sh runDocker.sh`
 
+Where *twitter-handle* is the handle of the account to monitor. E.g.
+
+`export TWEET_SCRAPER_HANDLE=reuters && sh runDocker.sh`
+
+To start up the app subsequently, run
+
+`docker start tweet-scraper -a`
+
+The -a flag attaches to container to stdout.
+
 ### Docker Compose
 
 Requirements:
@@ -35,10 +45,6 @@ Requirements:
 From the root directory of the project run the following command:
 
 `export TWEET_SCRAPER_HANDLE=twitter-handle && docker-compose build && docker-compose up`
-
-Where *twitter-handle* is the handle of the account to monitor. E.g.
-
-`export TWEET_SCRAPER_HANDLE=reuters && docker-compose build && docker-compose up`
 
 
 ## Usage
