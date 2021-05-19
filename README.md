@@ -86,7 +86,7 @@ Requirements
 - app process will need write permissions for its own directory
 - possibly Firefox installed, geckodriver available
 
-This is perhaps the least recommended method of running the app as it's most dependent on the host environment. All of the requirements for the Pipenv method also apply, and python3 and pip3 must be available.
+This is perhaps the least recommended method of running the app as it's most dependent on the host environment. All of the requirements for the Pipenv method also apply, and python3 and pip3 must be available as commands.
 
 On first starting the app run:
 
