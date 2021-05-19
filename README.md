@@ -3,7 +3,7 @@
 ## Description
 This app scrapes the most recent tweets from a given account and prints them to stdout, and then polls the timeline once every 10 minutes for new tweets.
 
-The project is written in Python, uses Selenium for scraping and runs a Flask server which exposes a few APIs (see Usage).
+The project is written in Python3, uses Selenium for scraping and runs a Flask server which exposes a few APIs (see Usage).
 
 ## Install and Run
 Although this app should run on Windows in containerised or non-containerised form, the instructions here are for *nix systems.
