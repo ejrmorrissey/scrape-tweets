@@ -12,7 +12,7 @@ The easiest way to ensure your environment is set up to run the app is to run in
 
 **Note: When running with a container image created will be large (hundreds of mb) as it includes everything needed to run Selenium.**
 
-**In all of the following commands, substitute 'twitter-handle' for the handle of the account you wish to monitor. E.g. 'reuters'***
+**In all of the following commands, substitute 'twitter-handle' for the handle of the account you wish to monitor. E.g. 'reuters'**
 
 ### Docker
 
