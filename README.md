@@ -98,7 +98,7 @@ Subsquently you can run,
 `export TWEET_SCRAPER_HANDLE=twitter-handle && sh pythonRun.sh`
 
 ## Usage
-Regardless of which method you choose to run the app, it will print tweets to stdout. Initially 5 tweets should be printed (possibly with intermediate loading if required), and then every 10 minutes the feed will be polled for new tweets.
+Regardless of which method you choose to run the app, it will print tweets to stdout. Initially 5 tweets should be printed (possibly with intermediate loading if required), and then every 10 minutes the feed will be polled for new tweets. If a tweet loads with subtweets by the author underneath, these will be grouped with the main tweet and not counted separately.
 
 With the above methods for running, a couple of control-c's should kill the app.
 
