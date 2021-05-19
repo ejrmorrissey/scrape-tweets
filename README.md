@@ -35,7 +35,7 @@ To start up the app subsequently, run
 
 `docker start tweet-scraper -a`
 
-The -a flag attaches to container to stdout.
+The -a flag attaches the container to stdout.
 
 ### Pipenv
 
