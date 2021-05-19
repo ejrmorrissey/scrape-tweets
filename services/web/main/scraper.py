@@ -23,10 +23,8 @@ PINNED_REL_XPATH = "/../div[1]//*[text()='Pinned Tweet']"
 
 class Scraper:
 
-    #handle = "reuters"
 
     def __init__(self):
-        #self.handle = app.config["handle"]
         opts = Options()
         opts.headless = True
         self.browser = Firefox(options=opts)
@@ -82,6 +80,24 @@ class Scraper:
         tweet_elements = self._get_tweet_elements()
         tweets = self._filter_pinned_tweets([self._element_to_tweet(element) for element in tweet_elements])
         return tweets
+
+    def _wait_for_tweets(self):
+        """
+        Wait for tweets to load in case we try to pull elements whilst the page is refreshing
+        :return: a list of Tweet objects
+        """
+        counter = 0
+        loaded = False
+        new_tweets = []
+        # Since refresh has just been called, we may need to wait for the page to reload
+        while loaded is False and counter < 60:
+            try:
+                new_tweets = self._scrape_tweets()
+                loaded = True
+            except StaleElementReferenceException:
+                counter += 1
+                time.sleep(0.5)
+        return new_tweets
 
     def _filter_pinned_tweets(self, tweets):
         """
@@ -163,7 +179,7 @@ class Scraper:
         """
         print(f"Loading {app.config['handle']}'s feed, this may take a few moments...")
         self.refresh()
-        tweets = self._scrape_tweets()
+        tweets = self._wait_for_tweets()
         # Keep a set of tweet status ids to prevent scraping tweets which have already been loaded
         loaded_statuses = set([tweet.status_id for tweet in tweets])
         self._print_latest_tweets(tweets)
@@ -172,7 +188,7 @@ class Scraper:
         while num_printed < 5:
             print("Still loading tweets...")
             bottom_of_page = self._scroll_timeline()
-            additional_tweets = [tweet for tweet in self._scrape_tweets() if tweet.status_id not in loaded_statuses]
+            additional_tweets = [tweet for tweet in self._wait_for_tweets() if tweet.status_id not in loaded_statuses]
             loaded_statuses.update([tweet.status_id for tweet in additional_tweets])
             if len(additional_tweets) > 0:
                 # Make up the difference between 5 and the number of tweets already printed
@@ -196,19 +212,10 @@ class Scraper:
         # load a set of all tweets previously stored to avoid scraping the same tweets multiple times
         loaded_statuses = set([tweet.status_id for tweet in all_tweets])
         self.refresh()
-        counter = 0
-        loaded = False
-        new_tweets = []
-        # Since refresh has just been called, we may need to wait for the page to reload
-        while loaded is False and counter < 60:
-            try:
-                new_tweets = [tweet for tweet in self._scrape_tweets() if
-                              tweet.status_id not in loaded_statuses and tweet.date > all_tweets[-1].date]
-                loaded = True
-            except StaleElementReferenceException:
-                counter += 1
-                time.sleep(0.5)
-        all_tweets.extend([tweet for tweet in new_tweets])
+        new_tweets = [tweet for tweet in self._wait_for_tweets() if
+                      tweet.status_id not in loaded_statuses and tweet.date > all_tweets[-1].date]
+
+        all_tweets = [tweet for tweet in new_tweets] + all_tweets
         loaded_statuses.update([tweet.status_id for tweet in new_tweets])
         page_scrolls = 0
         bottom_of_page = False
@@ -224,9 +231,9 @@ class Scraper:
             # Ensure that the newly scraped tweets are chronologically later than the most recent tweet from the last
             # load. There may be unexpected behaviour is the user has made a large amount of tweets since initial load
             # and these include retweets which aren't in chronological order. However this is an edge case.
-            new_tweets = [tweet for tweet in self._scrape_tweets()
+            new_tweets = [tweet for tweet in self._wait_for_tweets()
                           if tweet.status_id not in loaded_statuses and tweet.date > all_tweets[-1].date]
-            all_tweets.extend([tweet for tweet in new_tweets])
+            all_tweets = [tweet for tweet in new_tweets] + all_tweets
             loaded_statuses.update([tweet.status_id for tweet in new_tweets])
         self._write_serialised(all_tweets)
         return

@@ -15,7 +15,7 @@ def main_loop():
             time.sleep(1)
     requests.get(f"http://0.0.0.0:5000/loadTimeline")
     while True:
-        time.sleep(60)
+        time.sleep(60*10)
         requests.get(f"http://0.0.0.0:5000/updateTimeline")
 
 
@@ -23,5 +23,5 @@ if __name__ == "__main__":
     p = multiprocessing.Process(target=main_loop)
     p.start()
     app.config['handle'] = sys.argv[2]
-    app.run(use_reloader=False, host='0.0.0.0')
+    app.run(use_reloader=False, host='0.0.0.0', debug=False)
     p.join()
