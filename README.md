@@ -8,7 +8,11 @@ The project is written in Python, uses Selenium for scraping and runs a Flask se
 ## Install and Run
 Although this app should run on Windows in containerised or non-containerised form, the instructions here are for *nix systems.
 
-The easiest way to ensure your environment is set up to run the app is to run inside a container. **Note: The image created will be large (hundreds of mb) as it includes everything needed to run Selenium in a container.**
+The easiest way to ensure your environment is set up to run the app is to run inside a container. However, with this method the image will need to be built again in order to change the twitter account that app monitors. With a pipenv or python deployment the twitter account followed can be set every time the app is run.
+
+**Note: When running with a container image created will be large (hundreds of mb) as it includes everything needed to run Selenium.**
+
+**In all of the following commands, substitute 'twitter-handle' for the handle of the account you wish to monitor. E.g. 'reuters'***
 
 ### Docker
 
@@ -47,6 +51,29 @@ From the root directory of the project run the following command:
 `export TWEET_SCRAPER_HANDLE=twitter-handle && docker-compose build && docker-compose up`
 
 To start up the app subsequently, run `docker-compose up` in the project root.
+
+### Pipenv
+
+Requirements
+- Python3 environment set up with pipenv
+- port 5000 is available
+- internet access for installing packages
+- app process will need write permissions for its own directory
+- possibly Firefox installed, geckodriver available
+
+Some scripts are provided to make pipenv deployment easier. On first starting the app run:
+
+`export TWEET_SCRAPER_HANDLE=twitter-handle && sh pipenvSetup.sh && sh pipenvRun.sh`
+
+Subsquently you can run,
+
+`export TWEET_SCRAPER_HANDLE=twitter-handle && sh pipenvRun.sh`
+
+Unlike a containerised deployment, the twitter handle can be set anew each time the app is started.
+
+Running the app with this method may reuqire Firefox to be installed in your environment, and the firefox geckdodriver for selenium may need to be installed separately. Some methods of doing this are contained in these threads,
+[https://stackoverflow.com/questions/41190989/how-do-i-install-geckodriver](https://stackoverflow.com/questions/41190989/how-do-i-install-geckodriver)
+[https://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu](https://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu)
 
 ## Usage
 Regardless of which method you choose to run the app, it will print tweets to stdout. Initially 5 tweets should be printed (possibly with intermediate loading if required), and then every 10 minutes the feed will be polled for new tweets.
