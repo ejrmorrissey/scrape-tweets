@@ -1,0 +1,11 @@
+
+services:
+  web:
+    build: ./services
+    command: python3 manage.py run ${TWEET_SCRAPER_HANDLE}
+    volumes:
+      - ./services/web/:/usr/src/app/
+    ports:
+      - 5000:5000
+    env_file:
+      - .env.dev
