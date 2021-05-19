@@ -8,7 +8,7 @@ The project is written in Python3, uses Selenium for scraping and runs a Flask s
 ## Install and Run
 Although this app should run on Windows in containerised or non-containerised form, the instructions here are for *nix systems.
 
-The easiest way to ensure your environment is set up to run the app is to run inside a container. However, with this method the image will need to be built again in order to change the twitter account that app monitors. With a pipenv or python deployment the twitter account followed can be set every time the app is run.
+The easiest way to ensure your environment is set up to run the app is to run inside a container. However, with this method the image and container will need to be removed and built again in order to change the twitter account that app monitors. With a pipenv or python deployment the twitter account followed can be set every time the app is run.
 
 **Note: When running with a container image created will be large (hundreds of mb) as it includes everything needed to run Selenium.**
 
@@ -37,21 +37,6 @@ To start up the app subsequently, run
 
 The -a flag attaches to container to stdout.
 
-### Docker Compose
-
-Requirements:
-- docker-compose installed
-- port 5000 is available
-- sufficient storage for docker image
-- internet access for pulling image etc
-- app process will need write permissions for its own directory
-
-From the root directory of the project run the following command:
-
-`export TWEET_SCRAPER_HANDLE=twitter-handle && docker-compose build && docker-compose up`
-
-To start up the app subsequently, run `docker-compose up` in the project root.
-
 ### Pipenv
 
 Requirements
@@ -76,6 +61,22 @@ Running the app with this method may require Firefox to be installed in your env
 [https://stackoverflow.com/questions/41190989/how-do-i-install-geckodriver](https://stackoverflow.com/questions/41190989/how-do-i-install-geckodriver)
 
 [https://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu](https://askubuntu.com/questions/870530/how-to-install-geckodriver-in-ubuntu)
+
+
+### Docker Compose
+
+Requirements:
+- docker-compose installed
+- port 5000 is available
+- sufficient storage for docker image
+- internet access for pulling image etc
+- app process will need write permissions for its own directory
+
+From the root directory of the project run the following command:
+
+`export TWEET_SCRAPER_HANDLE=twitter-handle && docker-compose build && docker-compose up`
+
+To start up the app subsequently, run `docker-compose up` in the project root.
 
 ### Straightforward Python
 
